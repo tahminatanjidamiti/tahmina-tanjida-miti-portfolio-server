@@ -8,6 +8,10 @@ router.post(
     "/login",
     AuthController.loginWithEmailAndPassword
 )
+router.post(
+    "/google",
+    AuthController.authWithGoogle
+)
 
 
 export const authRouter = router;
