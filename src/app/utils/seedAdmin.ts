@@ -26,8 +26,8 @@ export const seedAdmin = async () => {
     };
 
     const admin = await prisma.user.create({ data: payload });
-    console.log("Admin Created Successfully", admin);
+    // console.log("Admin Created Successfully", admin);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
   }
 };
