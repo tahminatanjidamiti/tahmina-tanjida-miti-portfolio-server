@@ -2,6 +2,7 @@ import http, { Server } from "http";
 import app from "./app";
 import dotenv from "dotenv";
 import { prisma } from "./app/config/db";
+import { seedAdmin } from "./app/utils/seedAdmin";
 
 dotenv.config();
 
@@ -66,4 +67,7 @@ function handleProcessEvents() {
   });
 }
 
-startServer();
+(async () => {
+   await startServer()
+   await seedAdmin()
+})()

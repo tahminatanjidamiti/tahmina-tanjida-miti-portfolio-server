@@ -1,11 +1,29 @@
 import { prisma } from "../../app/config/db";
 import { Prisma, User } from "../../generated/prisma/client";
+import bcryptjs from "bcryptjs";
 
 
 const createUser = async (payload: Prisma.UserCreateInput): Promise<User> => {
-    const createdUser = await prisma.user.create({
-        data: payload
-    })
+    const { email, password, ...rest } = payload;
+
+  const isUserExist = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (isUserExist) {
+    throw new Error("User already exists");
+  }
+
+  const hashedPassword = await bcryptjs.hash(password as string, Number(process.env.BCRYPT_SALT_ROUND))
+
+  const createdUser = await prisma.user.create({
+    data: {
+      email,
+      password: hashedPassword,
+      ...rest,
+    },
+  });
+
     return createdUser
 }
 
@@ -22,7 +40,8 @@ const getAllFromDB = async () => {
             updatedAt: true,
             role: true,
             status: true,
-            posts: true
+            posts: true,
+            projects: true
         },
         orderBy: {
             createdAt: "desc"
@@ -46,20 +65,26 @@ const getUserById = async (id: number) => {
             createdAt: true,
             updatedAt: true,
             status: true,
-            posts: true
+            posts: true,
+            projects: true
         }
     })
     return result;
 }
 
-const updateUser = async (id: number, payload: Partial<User>) => {
-    const result = await prisma.user.update({
-        where: {
-            id
-        },
-        data: payload
-    })
-    return result;
+const updateUser = async (id: number, payload: Partial<Prisma.UserUpdateInput>) => {
+    let dataToUpdate = { ...payload };
+
+  if (payload.password) {
+    dataToUpdate.password = await bcryptjs.hash(payload.password as string, Number(process.env.BCRYPT_SALT_ROUND))
+  }
+
+  const updatedUser = await prisma.user.update({
+    where: { id },
+    data: dataToUpdate,
+  });
+
+  return updatedUser;
 }
 
 const deleteUser = async (id: number) => {
