@@ -4,6 +4,7 @@ import express from "express";
 import { userRouter } from "./modules/user/user.router";
 import { authRouter } from "./modules/auth/auth.router";
 import { postRouter } from "./modules/post/post.router";
+import { projectRouter } from "./modules/project/project.router";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/post", postRouter);
+app.use("/api/v1/project", projectRouter);
 app.use("/api/v1/auth", authRouter);
 
 app.get("/", (_req, res) => {
