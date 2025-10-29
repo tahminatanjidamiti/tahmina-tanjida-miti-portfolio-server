@@ -7,11 +7,11 @@ router.post(
     "/",
     PostController.createPost
 )
+router.get("/stats", PostController.getBlogStat);
 router.get("/", PostController.getAllPosts);
 router.get("/:id", PostController.getPostById);
 router.patch("/:id", PostController.updatePost);
 router.delete("/:id", PostController.deletePost);
-
 
 
 export const postRouter = router;
