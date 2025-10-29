@@ -1,6 +1,7 @@
 import compression from "compression";
 import cors from "cors";
 import express from "express";
+import { userRouter } from "./modules/user/user.router";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(
   })
 );
 
+app.use("/api/v1/user", userRouter);
 
 app.get("/", (_req, res) => {
   res.send("API is running!!");

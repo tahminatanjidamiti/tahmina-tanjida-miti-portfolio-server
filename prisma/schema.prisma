@@ -14,6 +14,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  MODERATOR
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  BLOCK
+}
+
 model User {
   id         Int        @id @default(autoincrement())
   name       String
@@ -26,16 +38,38 @@ model User {
   isVerified Boolean    @default(false)
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
+  posts      Post[]
+  projects   Project[]
 }
 
-enum Role {
-  ADMIN
-  MODERATOR
-  USER
+model Post {
+  id         Int      @id @default(autoincrement())
+  title      String
+  content    String
+  thumbnail  String?
+  isFeatured Boolean  @default(true)
+  tags       String[]
+  views      Int      @default(0)
+  authorId   Int
+  author     User     @relation(fields: [authorId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
-enum UserStatus {
-  ACTIVE
-  INACTIVE
-  BLOCK
+model Project {
+  id         Int      @id @default(autoincrement())
+  title        String
+  thumbnail    String?  
+  projectLinks  String[] 
+  liveSite     String? 
+  description  String
+  features     String[] 
+  techStack    String[]
+  views      Int      @default(0)
+  isFeatured Boolean  @default(true)
+  authorId   Int
+  author     User     @relation(fields: [authorId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
+
