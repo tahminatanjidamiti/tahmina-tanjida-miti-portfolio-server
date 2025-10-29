@@ -72,9 +72,35 @@ const getAllPosts = async ({
     };
 };
 
+const getPostById = async (id: number) => {
+    return await prisma.$transaction(async (tx) => {
+        await tx.post.update({
+            where: { id },
+            data: {
+                views: {
+                    increment: 1
+                }
+            }
+        });
+        return await tx.post.findUnique({
+            where: { id },
+            include: { author: true },
+        });
+    })
+};
 
+const updatePost = async (id: number, data: Partial<any>) => {
+    return prisma.post.update({ where: { id }, data });
+};
+
+const deletePost = async (id: number) => {
+    return prisma.post.delete({ where: { id } });
+};
 
 export const PostService = {
     createPost,
     getAllPosts,
+    getPostById,
+    updatePost,
+    deletePost,
 }
