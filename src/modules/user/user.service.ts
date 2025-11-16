@@ -40,6 +40,7 @@ const getAllFromDB = async () => {
             updatedAt: true,
             role: true,
             status: true,
+            isVerified: true,
             posts: true,
             projects: true
         },
@@ -65,6 +66,7 @@ const getUserById = async (id: number) => {
             createdAt: true,
             updatedAt: true,
             status: true,
+            isVerified: true,
             posts: true,
             projects: true
         }

@@ -2,11 +2,17 @@ import { Request, Response } from "express";
 import { PostService } from "./post.service";
 
 const createPost = async (req: Request, res: Response) => {
+//     console.log("Headers:", req.headers["content-type"]);
+//   console.log("Raw Body:", req.body);
     try {
+         if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).send("Empty body received");
+    }
         const result = await PostService.createPost(req.body)
         res.status(201).json(result);
-    } catch (error) {
-        res.status(500).send(error)
+    } catch (error: any) {
+        // console.log(error.message)
+        res.status(500).send(error.message)
     }
 }
 
@@ -32,6 +38,7 @@ const getPostById = async (req: Request, res: Response) => {
 };
 
 const updatePost = async (req: Request, res: Response) => {
+    // console.log("controller", req.body)
     const post = await PostService.updatePost(Number(req.params.id), req.body);
     res.json(post);
 };

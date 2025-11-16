@@ -16,9 +16,9 @@ const getAllProjects = async (req: Request, res: Response) => {
         const limit = Number(req.query.limit) || 10;
         const search = (req.query.search as string) || "";
         const isFeatured = req.query.isFeatured ? req.query.isFeatured === "true" : undefined;
-        const tags = req.query.tags ? (req.query.tags as string).split(",") : [];
+        const features = req.query.features ? (req.query.features as string).split(",") : [];
 
-        const result = await ProjectService.getAllProjects({ page, limit, search, isFeatured, tags });
+        const result = await ProjectService.getAllProjects({ page, limit, search, isFeatured, features });
         res.json(result);
     } catch (err) {
         res.status(500).json({ error: "Failed to fetch projects", details: err });
@@ -32,6 +32,7 @@ const getProjectById = async (req: Request, res: Response) => {
 };
 
 const updateProject = async (req: Request, res: Response) => {
+    // console.log("controller", req.body)
     const project = await ProjectService.updateProject(Number(req.params.id), req.body);
     res.json(project);
 };

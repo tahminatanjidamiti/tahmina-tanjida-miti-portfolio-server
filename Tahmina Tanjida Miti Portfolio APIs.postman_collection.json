@@ -1,0 +1,478 @@
+{
+	"info": {
+		"_postman_id": "6595e7b5-1f51-4da1-9f31-172fe57c9c29",
+		"name": "Tahmina Tanjida Miti Portfolio APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45483878",
+		"_collection_link": "https://tahminatanjidamiti.postman.co/workspace/Tahmina-Tanjida-Miti's-Workspac~7b57061b-4d96-418e-817e-77afeabda221/collection/45483878-6595e7b5-1f51-4da1-9f31-172fe57c9c29?action=share&source=collection_link&creator=45483878"
+	},
+	"item": [
+		{
+			"name": "user routes",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Example\",\r\n    \"email\" : \"@gmail.com\",\r\n    \"phone\" :\"01323456784\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single By Id From DB",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"picture\" :\"https://i.ibb.co.com/gbzDM6wB/miti-removebg-preview-4.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login with email and password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"tahminatanjidamiti@gmail.com\",\r\n    \"password\" :\"@Admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User From DB",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "post routes",
+			"item": [
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Build Smarter Backends with Node.js, Express & Prisma! 💡\",\r\n  \"content\": \"Backend development no longer has to feel complex or overwhelming. Node.js with Express provides the speed and flexibility developers love—add Prisma, and you unlock a new world of productivity and type-safe database access. This trio is revolutionizing how modern APIs and backend systems are built.\\nWhy This Stack Boosts Developer Efficiency:\\nType-Safe Database Queries – Prisma eliminates database errors by providing IntelliSense and strong typing.\\nRapid API Development – Express keeps your backend clean, modular, and scalable.\\nDatabase Flexibility – Easily work with PostgreSQL, MySQL, MongoDB, SQLite and more.\\nIf you want to write cleaner code, reduce bugs, and accelerate backend development, Node + Express + Prisma is the powerhouse combo you can’t afford to ignore.\",\r\n  \"thumbnail\": \"https://i.ibb.co.com/359j5K6z/nodejs-express-prisma.png\",\r\n  \"isFeatured\": true,\r\n  \"tags\": [\"NodeJS\", \"Express\", \"Prisma\", \"BackendDevelopment\", \"API\", \"TypeSafe\"],\r\n  \"authorId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/post",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/post",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Post",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"title\": \"Neon\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/post/10",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"post",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/post/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"post",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Post By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/post/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"post",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Blog Stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/post/stats",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"post",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "project routes",
+			"item": [
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\" : \"This is post sixth title\",\r\n    \"content\" : \"This is post sixth content\",\r\n    \"thumbnail\" :\"https://i.ibb.co.com/p6LC8CZx/DALL-E-2025-03-13-03-47-54-A-digital-abstract-network-visualization-with-interconnected-nodes-and-li.webp\",\r\n    \"isFeatured\" : false,\r\n    \"tags\" : [\"blog\", \"web\", \"famous\", \"network\", \"large\"],\r\n    \"authorId\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/project",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/project",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"title\": \"This is post fourth title\",\r\n   \"content\": \"This is post fourth content\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/project/4",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"project",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/project/5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"project",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Project By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/project/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"project",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project Stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/project/stats",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"project",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": ""
+		}
+	]
+}

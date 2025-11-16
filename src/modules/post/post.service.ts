@@ -1,9 +1,32 @@
 import { prisma } from "../../app/config/db";
 import { Prisma, Post } from "../../generated/prisma/client";
+type CreatePostPayload = Prisma.PostCreateInput & { authorId: number };
 
-const createPost = async (payload: Prisma.PostCreateInput): Promise<Post> => {
+
+const createPost = async (payload: CreatePostPayload): Promise<Post> => { 
+    //** Destructure the payload: extract the fields and ignore any others (like $ACTION_ID)**//
+    const { 
+        title, 
+        content, 
+        thumbnail, 
+        tags, 
+        isFeatured, 
+        authorId 
+    } = payload;
+
+    const cleanData = {
+        title,
+        content,
+        thumbnail,
+        tags,
+        isFeatured,
+        author: {
+        connect: { id: authorId }
+      }
+    };
+
     const result = await prisma.post.create({
-        data: payload,
+        data: cleanData,
         include: {
             author: {
                 select: {
@@ -13,10 +36,10 @@ const createPost = async (payload: Prisma.PostCreateInput): Promise<Post> => {
                 }
             }
         }
-    })
+    });
 
     return result;
-}
+};
 
 const getAllPosts = async ({
     page = 1,
@@ -89,7 +112,8 @@ const getPostById = async (id: number) => {
     })
 };
 
-const updatePost = async (id: number, data: Partial<any>) => {
+const updatePost = async (id: number, data: Partial<Prisma.PostUpdateInput>) => {
+    // console.log("service", id, data)
     return prisma.post.update({ where: { id }, data });
 };
 

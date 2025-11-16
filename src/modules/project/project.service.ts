@@ -1,13 +1,48 @@
 import { prisma } from "../../app/config/db";
 import { Prisma, Project } from "../../generated/prisma/client";
 
-const createProject = async (payload: Prisma.ProjectCreateInput): Promise<Project> => {
-    return await prisma.project.create({
-        data: payload,
+type CreateProjectPayload = Prisma.ProjectCreateInput & { authorId: number };
+
+const createProject = async (payload: CreateProjectPayload): Promise<Project> => {
+    const {
+        title,
+        thumbnail,
+        liveSite,
+        clientSite,
+        serverSite,
+        description,
+        features,
+        isFeatured,
+        authorId
+    } = payload;
+
+    const cleanData = {
+        title,
+        thumbnail,
+        liveSite,
+        clientSite,
+        serverSite,
+        description,
+        features,
+        isFeatured,
+        author: {
+        connect: { id: authorId }
+      }
+    };
+
+    const result = await prisma.project.create({
+        data: cleanData,
         include: {
-            author: { select: { id: true, name: true, email: true } }
+            author: {
+                select: {
+                    id: true,
+                    name: true,
+                    email: true
+                }
+            }
         }
     });
+    return result
 };
 
 const getAllProjects = async ({
@@ -15,13 +50,13 @@ const getAllProjects = async ({
     limit = 10,
     search,
     isFeatured,
-    tags
+    features
 }: {
     page?: number;
     limit?: number;
     search?: string;
     isFeatured?: boolean;
-    tags?: string[];
+    features?: string[];
 }) => {
     const skip = (page - 1) * limit;
 
@@ -34,7 +69,7 @@ const getAllProjects = async ({
                 ]
             },
             typeof isFeatured === "boolean" && { isFeatured },
-            (tags && tags.length > 0) && { techStack: { hasEvery: tags } }
+            (features && features.length > 0) && { techStack: { hasEvery: features } }
         ].filter(Boolean)
     };
 
@@ -73,7 +108,8 @@ const getProjectById = async (id: number) => {
     });
 };
 
-const updateProject = async (id: number, data: Partial<any>) => {
+const updateProject = async (id: number, data: Partial<Prisma.ProjectUpdateInput>) => {
+    // console.log("service", id, data)
     return prisma.project.update({ where: { id }, data });
 };
 

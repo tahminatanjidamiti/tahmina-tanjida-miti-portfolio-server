@@ -60,11 +60,11 @@ model Project {
   id         Int      @id @default(autoincrement())
   title        String
   thumbnail    String?  
-  projectLinks  String[] 
   liveSite     String? 
+  clientSite     String? 
+  serverSite     String? 
   description  String
   features     String[] 
-  techStack    String[]
   views      Int      @default(0)
   isFeatured Boolean  @default(true)
   authorId   Int

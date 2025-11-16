@@ -18,7 +18,7 @@ export const seedAdmin = async () => {
     );
 
     const payload: Prisma.UserCreateInput = {
-      name: "Admin",
+      name: "Tahmina Tanjida Miti",
       role: Role.ADMIN,
       email: process.env.ADMIN_EMAIL as string,
       password: hashedPassword,
